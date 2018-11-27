@@ -1,4 +1,11 @@
 class UserController < ApplicationController
+  def show
+    @user = User.find_by id: params[:id]
+    return if @user
+    flash[:danger] = t ".nouser"
+    redirect_to root_path
+  end
+
   def new
     @user = User.new
   end
